@@ -1,5 +1,7 @@
 # Fingoti SDK
 
+[![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/fingoti/sdk-java)
+
 The Fingoti SDK makes it easy to use Fingoti infrastructure to manage your organisations & users as well as communicate with your devices, follow the examples below to get started
 
 ---
@@ -173,7 +175,17 @@ public class Example{
 
         // Adds a scheduleCron write command, the payload for this command includes the slot
         builder.addScheduleCron(2, "20 * * * *");
+
+        try {
+          MqttDeviceResponse result = builder.send();
+          System.out.println(result);
+        } catch (ApiException e) {
+          System.err.println("Exception when sending device request");
+          System.err.println("Status code: " + e.getCode());
+          System.err.println("Reason: " + e.getResponseBody());
+        }
     }
 }
 ```
+
 After running this example you should see 2 outputs in your console, the first one is the what was sent to the device and the second is what the device responded with, This is just a small introduction into the command builder and you can find a full list of [avaliable commands](https://developer.fingoti.com/hardware/protocol)
